@@ -1,0 +1,69 @@
+{
+  "name" : "tc_login",
+  "desc" : "로그인 테스트",
+  "service": {
+		"use_libsodium": false,
+		"account_prefix": "tc",
+		"password_prefix": "d3",
+		"bot_count": 1000,
+		"bot_start_index": 1,
+		"worker_count": 8,
+		"max_lock": 10,
+		"log": {
+      "level": "debug",
+			"console": {
+				"enabled": true
+			},
+      "forwarder": {
+        "enabled" : true, 
+        "level" : "warn" 
+      }
+		},
+		"data_folder": "./.",
+		"report": {
+      "prefix": "tc_simple" 
+    }, 
+    "forwarder" : {
+      "listen" : "0.0.0.0:7090", 
+      "backlog" : 10
+    }
+	}, 
+  "flow" : [
+    {
+      "type" : "act_delay",
+      "name" : "delay_begin",
+      "delay" : 1000,
+      "mark" :  "mark_1",
+      "slots" : {
+        "failure" : { "command" :  "exit" },
+        "success": { "command":  "next" }
+      }
+    },
+    {
+      "type": "act_connect",
+      "name": "connect",
+      "address": "10.103.36.11:8901",
+      "slots": {
+        "failure": { "command": "exit" },
+        "success": { "command": "next" }
+      }
+    },
+    {
+      "type": "act_login",
+      "name": "login",
+      "slots": {
+        "failure": { "command": "exit" },
+        "success": { "command": "next" }
+      }
+    },
+    {
+      "type" : "act_delay",
+      "name" : "delay_end",
+      "delay" : 1000,
+      "slots" : {
+        "failure" : { "command" :  "exit" },
+        "success": { "command": "exit" }
+      }
+    }
+  ]
+}

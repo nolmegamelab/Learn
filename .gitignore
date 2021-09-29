@@ -36,3 +36,11 @@
 .user
 .history/
 Debug
+
+# Tex
+*.log
+*.gz
+*.aux 
+*.out
+*.toc
+

@@ -1,0 +1,24 @@
+﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\nolme\Learn).
+  Creating makefile for LearnUE4Editor (Build.version is newer)
+  Parsing headers for LearnUE4Editor
+    Running UnrealHeaderTool "C:\nolme\Learn\LearnUE4\LearnUE4.uproject" "C:\nolme\Learn\LearnUE4\Intermediate\Build\Win64\LearnUE4Editor\DebugGame\LearnUE4Editor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\keedo\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  LogInit: Display: Loading text-based GConfig....
+  Reflection code generated for LearnUE4Editor in 4.5591891 seconds
+  Building LearnUE4Editor...
+  Using Visual Studio 2019 14.29.30136 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Building 11 actions with 16 processes...
+    [1/11] Default.rc2
+    [2/11] SharedPCH.Engine.NonOptimized.ShadowErrors.cpp
+    [3/11] LearnUE4.cpp
+    [4/11] LearnUE4.init.gen.cpp
+    [5/11] LearnUE4GameMode.cpp
+    [6/11] LearnUE4GameMode.gen.cpp
+    [7/11] LearnUE4Character.gen.cpp
+    [8/11] LearnUE4Character.cpp
+    [9/11] UE4Editor-LearnUE4-Win64-DebugGame.dll
+       C:\nolme\Learn\LearnUE4\Intermediate\Build\Win64\UE4Editor\DebugGame\LearnUE4\UE4Editor-LearnUE4-Win64-DebugGame.suppressed.lib 라이브러리 및 C:\nolme\Learn\LearnUE4\Intermediate\Build\Win64\UE4Editor\DebugGame\LearnUE4\UE4Editor-LearnUE4-Win64-DebugGame.suppressed.exp 개체를 생성하고 있습니다.
+    [10/11] UE4Editor-LearnUE4-Win64-DebugGame.lib
+       C:\nolme\Learn\LearnUE4\Intermediate\Build\Win64\UE4Editor\DebugGame\LearnUE4\UE4Editor-LearnUE4-Win64-DebugGame.lib 라이브러리 및 C:\nolme\Learn\LearnUE4\Intermediate\Build\Win64\UE4Editor\DebugGame\LearnUE4\UE4Editor-LearnUE4-Win64-DebugGame.exp 개체를 생성하고 있습니다.
+    [11/11] LearnUE4Editor-Win64-DebugGame.target
+  Total time in Parallel executor: 23.96 seconds
+  Total execution time: 32.48 seconds

@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\nolme\\Learn\\LearnUE4\\Source\\LearnUE4\\LearnUE4.Build.cs",
+		"C:\\nolme\\Learn\\LearnUE4\\Source\\LearnUE4.Target.cs",
+		"C:\\nolme\\Learn\\LearnUE4\\Source\\LearnUE4Editor.Target.cs"
+	],
+	"EngineVersion": "4.27.2"
+}

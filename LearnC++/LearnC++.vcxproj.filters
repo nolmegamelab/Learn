@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="LearnN4713">
+      <UniqueIdentifier>{fe004d09-ae36-4278-a3c5-9079d5df873d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LearnStroustrup">
+      <UniqueIdentifier>{48e831f2-2afe-486b-af36-a1adbc2140ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LearnSTL">
+      <UniqueIdentifier>{76b63eaa-f68a-43cf-a2cb-40460685710b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LearnCoreStyleGuide">
+      <UniqueIdentifier>{94d99bca-8da8-454a-8d03-13978ff01f98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LearnC++.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnN4713\chap_20.cpp">
+      <Filter>LearnN4713</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_3.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_4.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_5.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_7.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_11.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_12.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_13.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_14.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_16.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_17.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnStroustrup\chap_28.cpp">
+      <Filter>LearnStroustrup</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\iterator.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\vector.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\xstddef.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\utility.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\type_traits.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\xmemory.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnSTL\algorithm.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LearnN4713\chap_20.md">
+      <Filter>LearnN4713</Filter>
+    </None>
+    <None Include="2013 Stroustrup - The C++ Programming Language 4th Edition.pdf" />
+    <None Include="LearnSTL\Cpp_STL_ReferenceManual.pdf">
+      <Filter>LearnSTL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LearnSTL\annotated_vector.hpp">
+      <Filter>LearnSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="LearnSTL\annotated_xmemory.hpp">
+      <Filter>LearnSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="LearnSTL\annotated_xstddef.hpp">
+      <Filter>LearnSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="LearnSTL\annotated_type_traits.hpp">
+      <Filter>LearnSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="LearnSTL\annotated_utility.hpp">
+      <Filter>LearnSTL</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

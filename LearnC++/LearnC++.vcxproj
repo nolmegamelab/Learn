@@ -144,6 +144,7 @@
     <ClCompile Include="LearnC++.cpp" />
     <ClCompile Include="LearnN4713\chap_20.cpp" />
     <ClCompile Include="LearnSTL\algorithm.cpp" />
+    <ClCompile Include="LearnSTL\HeapAllocator.cpp" />
     <ClCompile Include="LearnSTL\iterator.cpp" />
     <ClCompile Include="LearnSTL\type_traits.cpp" />
     <ClCompile Include="LearnSTL\utility.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="LearnSTL\annotated_vector.hpp" />
     <ClInclude Include="LearnSTL\annotated_xmemory.hpp" />
     <ClInclude Include="LearnSTL\annotated_xstddef.hpp" />
+    <ClInclude Include="LearnSTL\HeapAllocator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

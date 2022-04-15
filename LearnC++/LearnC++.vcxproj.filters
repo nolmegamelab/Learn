@@ -79,6 +79,9 @@
     <ClCompile Include="LearnSTL\algorithm.cpp">
       <Filter>LearnSTL</Filter>
     </ClCompile>
+    <ClCompile Include="LearnSTL\HeapAllocator.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LearnN4713\chap_20.md">
@@ -103,6 +106,9 @@
       <Filter>LearnSTL</Filter>
     </ClInclude>
     <ClInclude Include="LearnSTL\annotated_utility.hpp">
+      <Filter>LearnSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="LearnSTL\HeapAllocator.h">
       <Filter>LearnSTL</Filter>
     </ClInclude>
   </ItemGroup>

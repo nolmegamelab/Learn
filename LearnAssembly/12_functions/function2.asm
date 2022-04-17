@@ -60,4 +60,7 @@ main:
   leave
   ret
 
-    
+;
+; rbp is kept to the starting stack pointer 
+; that's the core of keeping frames 
+;  

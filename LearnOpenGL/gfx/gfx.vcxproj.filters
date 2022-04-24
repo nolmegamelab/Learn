@@ -16,7 +16,7 @@
     <ClCompile Include="App.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="learn\LearnSkeletalApp.cpp">
+    <ClCompile Include="learn\AppShaderSetup.cpp">
       <Filter>learn</Filter>
     </ClCompile>
   </ItemGroup>
@@ -24,7 +24,7 @@
     <ClInclude Include="App.hpp">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="learn\LearnSkeletalApp.hpp">
+    <ClInclude Include="learn\AppShaderSetup.hpp">
       <Filter>learn</Filter>
     </ClInclude>
   </ItemGroup>

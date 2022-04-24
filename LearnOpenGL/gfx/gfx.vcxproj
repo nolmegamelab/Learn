@@ -155,11 +155,11 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="gfx.cpp" />
-    <ClCompile Include="learn\LearnSkeletalApp.cpp" />
+    <ClCompile Include="learn\AppShaderSetup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="learn\LearnSkeletalApp.hpp" />
+    <ClInclude Include="learn\AppShaderSetup.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

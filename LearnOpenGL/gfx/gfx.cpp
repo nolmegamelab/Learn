@@ -1,5 +1,5 @@
 ﻿#include <gfx/app.hpp>
-#include <gfx/learn/LearnSkeletalApp.hpp>
+#include <gfx/learn/AppShaderSetup.hpp>
 #include <iostream>
 
 namespace {
@@ -12,10 +12,8 @@ int main()
 {
   auto app = CreateApplication();
 
-  auto config = gfx::App::Config{ "First Example", 1280, 600 };
-
-  app->Initialize(config); 
-  app->Display();
+  app->Initialize(); 
+  app->Update();
   app->Finish();
 }
 
@@ -23,7 +21,7 @@ namespace {
 
 gfx::App* CreateApplication()
 {
-  return new gfx::LearnSkeletalApp();
+  return new gfx::AppShaderSetup();
 }
 
 } // namespace

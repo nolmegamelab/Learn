@@ -27,11 +27,11 @@ public:
 
   virtual ~App();
 
-  Result Initialize(const Config& config);
+  virtual Result Initialize();
 
-  void Display();
+  virtual void Update();
 
-  void Finish();
+  virtual void Finish();
 
   GLFWwindow* GetWindow() const
   {
@@ -39,16 +39,25 @@ public:
   }
 
 protected: 
-  virtual Result OnInitialize(); 
+  void InitializeConfig(const Config& config);
 
-  virtual void OnProcess();
+  Result InitializeWindow();
 
-  virtual void OnDisplay();
+  GLuint CreateVertexShader(const char* src);
 
-  virtual void OnFinish();
+  GLuint CreateFragmentShader(const char* src);
+
+  GLuint CreateShaderProgram(GLuint vertex_shader, GLuint fragment_shader);
+
+  void PrintShaderLog(GLuint shader);
+
+  void PrintProgramLog(GLuint prog);
+
+  bool CheckErrorInOpenGL();
 
 private:
   GLFWwindow* window_;
+  Config config_;
 };
 
 } // namespace gfx

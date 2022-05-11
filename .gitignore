@@ -34,3 +34,5 @@
 # Visual Studio 
 .vs/
 .user
+Debug
+Release

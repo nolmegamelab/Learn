@@ -82,6 +82,9 @@
     <ClCompile Include="LearnSTL\HeapAllocator.cpp">
       <Filter>LearnSTL</Filter>
     </ClCompile>
+    <ClCompile Include="LearnSTL\printf.cpp">
+      <Filter>LearnSTL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LearnN4713\chap_20.md">

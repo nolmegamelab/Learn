@@ -9,14 +9,32 @@ from datetime import datetime
 
 def CheckTime(target_hour, target_minute):
   now = datetime.now()
-  result = now.hour == target_hour and now.minute == target_minute
-  return result
+  if now.hour > target_hour: 
+    return True
+  else: 
+    if now.hour == target_hour:
+      return now.minute >= target_minute
+  return False
+
+def IsAm():
+  now = datetime.now()
+  return now.hour < 12
+
+def MoveMouse(): 
+  x, y = pyautogui.position()
+  pyautogui.moveTo(10, 10)
+  pyautogui.moveTo(x, y)
+
+def MoveKeyboard(): 
+  pyautogui.press('volumedown')
+  pyautogui.press('volumeup')
 
 def WaitTime(target_hour, target_minute):
   while True:
     if CheckTime(target_hour, target_minute):
       return
-    print("Waiting...")
+    print("Waiting {:02}:{:02}".format(target_hour, target_minute))
+    MoveKeyboard()
     time.sleep(10)
 
 def FindProcessByName(name):
@@ -64,7 +82,7 @@ def PrepareChrome():
     try:
       rect = win32gui.GetWindowRect(hwnd)
       text = win32gui.GetWindowText(hwnd)
-      print(hwnd, "=>", text)
+      #print(hwnd, "=>", text)
       #if True:
       if text == "New Tab - Google Chrome":
         win32gui.SetForegroundWindow(hwnd)
@@ -73,23 +91,23 @@ def PrepareChrome():
         # I use . 16:9 Monitor , Calculate the percent using this calculations , , (x * .0204082) and (y * .0115774)
         tx = rect[0]
         ty = rect[1]
-        print("top", tx, ty)
-        print((hwnd, (rect[2] - rect[0], rect[3] - rect[1])))
+        #print("top", tx, ty)
+        #print((hwnd, (rect[2] - rect[0], rect[3] - rect[1])))
         x = rect[2] - rect[0]
         y = rect[3] - rect[1]
-        print(type(x), type(y))
+        #print(type(x), type(y))
     except:
       pass
 
   return proc
 
-def Enter(hour, minute):
-
-  proc = PrepareChrome()
-
-  print("Ready to enter office. Waiting...")
+def Enter(user, pw, hour, minute):
 
   WaitTime(hour, minute)
+
+  proc = PrepareChrome()
+  print("Ready to enter office.")
+  time.sleep(5)
 
   pyautogui.click(150, 58)
   pyautogui.write("gwa.webzen.co.kr")
@@ -101,14 +119,14 @@ def Enter(hour, minute):
   # pyautogui.click(743, 526) # edge
   for i in range(0, 20):
     pyautogui.press("backspace")
-  pyautogui.write("keedongpark")
+  pyautogui.write(user)
 
   time.sleep(1)
 
   pyautogui.press('tab')
   for i in range(0, 20):
     pyautogui.press("backspace")
-  pyautogui.write("6yhn&UJM") 
+  pyautogui.write(pw)
 
   pyautogui.click(823, 568) # chrome
   # pyautogui.click(743, 692) # edge
@@ -130,13 +148,14 @@ def Enter(hour, minute):
 
   print('Entered')
 
-def Leave(hour, minute):
-
-  proc = PrepareChrome()
-
-  print("Ready to leave office. Waiting...")
+def Leave(user, pw, hour, minute):
 
   WaitTime(hour, minute)
+
+  proc = PrepareChrome()
+  print("Ready to leave office.")
+
+  time.sleep(5)
 
   pyautogui.click(150, 58)
   pyautogui.write("gwa.webzen.co.kr")
@@ -147,7 +166,7 @@ def Leave(hour, minute):
   pyautogui.click(843, 406)
   for i in range(0, 20):
     pyautogui.press("backspace")
-  pyautogui.write("keedongpark")
+  pyautogui.write(user)
 
   time.sleep(1)
 
@@ -155,7 +174,7 @@ def Leave(hour, minute):
 
   for i in range(0, 20):
     pyautogui.press("backspace")
-  pyautogui.write("6yhn&UJM")
+  pyautogui.write(pw)
 
   pyautogui.click(823, 568)
 
@@ -176,8 +195,39 @@ def Leave(hour, minute):
 
   print("Left")
 
-# Leave(19, 15)
 
-Enter(9, 10)
+# enter_leave는 pyautogui를 사용하여 airtest와 같은 이미지와 
+# 입력 기반의 테스트 자동화를 실험해보기위해 만든 스크립트로 
+# 출퇴근 어뷰징에 사용하거나 팀 외부에 유출하지 않아야 합니다. 
+
+# 실행 시 크롬이 있어야 하고, 1920x1080 해상도에서 축소/확대가 없어야 
+# 마우스 위치가 맞을 수 있으므로 자기 환경에 맞게 마우스 위치를 조절해야 합니다. 
+# 또, 크롬이 최대 (maximzie)된 상태에 있으면 이동이 안 되어 동작하지 않습니다. 
+
+# 실제 실행할 때 크롬을 모두 종료하므로 중요한 작업이 크롬에서 
+# 실행될 경우 사용해서는 안 됩니다. 
+
+# 여기에 설정한 사용자와 비번으로 로그인하고 지정한 시간까지 대기 후 실행합니다. 
+
+config = {
+  "user" : "keedongpark", 
+  "pw" : "6yhUJM", 
+  "enter" : {
+    "hour" : 9, 
+    "minute" : 10
+  },
+  "leave" : {
+    "hour" : 19, 
+    "minute" : 15
+  }
+}
+
+if IsAm(): 
+  Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
+  Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
+else: 
+  Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
+  WaitTime(24, 0)
+  Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
 
 print("End")

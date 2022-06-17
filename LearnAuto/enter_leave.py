@@ -26,8 +26,8 @@ def MoveMouse():
   pyautogui.moveTo(x, y)
 
 def MoveKeyboard(): 
-  pyautogui.press('volumedown')
-  pyautogui.press('volumeup')
+  pyautogui.press('left')
+  pyautogui.press('right')
 
 def WaitTime(target_hour, target_minute):
   while True:
@@ -35,7 +35,16 @@ def WaitTime(target_hour, target_minute):
       return
     print("Waiting {:02}:{:02}".format(target_hour, target_minute))
     MoveKeyboard()
-    time.sleep(10)
+    time.sleep(300)
+
+def WaitExactHour(target_hour):
+  while True:
+    now = datetime.now()
+    if now.hour == target_hour: 
+      return 
+    print("Waiting {:02}".format(target_hour))
+    MoveKeyboard()
+    time.sleep(300)
 
 def FindProcessByName(name):
   for pid in psutil.pids(): 
@@ -103,6 +112,8 @@ def PrepareChrome():
 
 def Enter(user, pw, hour, minute):
 
+  print("Entering...")
+
   WaitTime(hour, minute)
 
   proc = PrepareChrome()
@@ -149,6 +160,7 @@ def Enter(user, pw, hour, minute):
   print('Entered')
 
 def Leave(user, pw, hour, minute):
+  print("Leaving...")
 
   WaitTime(hour, minute)
 
@@ -197,7 +209,7 @@ def Leave(user, pw, hour, minute):
 
 
 # enter_leave는 pyautogui를 사용하여 airtest와 같은 이미지와 
-# 입력 기반의 테스트 자동화를 실험해보기위해 만든 스크립트로 
+# 입력 기반의 테스트 자동화를 실험해 보기위해 만든 스크립트로 
 # 출퇴근 어뷰징에 사용하거나 팀 외부에 유출하지 않아야 합니다. 
 
 # 실행 시 크롬이 있어야 하고, 1920x1080 해상도에서 축소/확대가 없어야 
@@ -211,14 +223,14 @@ def Leave(user, pw, hour, minute):
 
 config = {
   "user" : "keedongpark", 
-  "pw" : "6yhUJM", 
+  "pw" : "6yhn&UJM", 
   "enter" : {
     "hour" : 9, 
-    "minute" : 10
+    "minute" : 30
   },
   "leave" : {
-    "hour" : 19, 
-    "minute" : 15
+    "hour" : 21, 
+    "minute" : 0 
   }
 }
 
@@ -227,7 +239,7 @@ if IsAm():
   Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
 else: 
   Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
-  WaitTime(24, 0)
+  WaitExactHour(5)
   Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
 
 print("End")

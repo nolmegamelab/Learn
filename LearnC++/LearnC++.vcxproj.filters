@@ -17,6 +17,9 @@
     <Filter Include="LearnCoreStyleGuide">
       <UniqueIdentifier>{94d99bca-8da8-454a-8d03-13978ff01f98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LearnCppReference">
+      <UniqueIdentifier>{3f9cbdfa-6a9d-47e4-90d2-63a9945e328c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LearnC++.cpp">
@@ -84,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="LearnSTL\printf.cpp">
       <Filter>LearnSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="LearnCppReference\basic_concepts.cpp">
+      <Filter>LearnCppReference</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

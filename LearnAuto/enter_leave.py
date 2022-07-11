@@ -78,6 +78,8 @@ def PrepareChrome():
     print("Cannot start chrome or find one")
     exit(-1)
 
+  pyautogui.click(1852, 10)
+
   time.sleep(3)
 
   hwnds = GetWindowHandleByPid(r[1])

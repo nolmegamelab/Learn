@@ -142,10 +142,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LearnC++.cpp" />
+    <ClCompile Include="LearnCppReference\basic_concepts.cpp" />
     <ClCompile Include="LearnN4713\chap_20.cpp" />
     <ClCompile Include="LearnSTL\algorithm.cpp" />
     <ClCompile Include="LearnSTL\HeapAllocator.cpp" />
     <ClCompile Include="LearnSTL\iterator.cpp" />
+    <ClCompile Include="LearnSTL\printf.cpp" />
     <ClCompile Include="LearnSTL\type_traits.cpp" />
     <ClCompile Include="LearnSTL\utility.cpp" />
     <ClCompile Include="LearnSTL\vector.cpp" />

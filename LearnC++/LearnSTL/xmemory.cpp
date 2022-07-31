@@ -5,6 +5,8 @@
 #include <list>
 #include <vector>
 #include <map>
+#include <concurrent_unordered_map.h>
+#include <concurrent_unordered_set.h>
 
 #include "HeapAllocator.h"
 

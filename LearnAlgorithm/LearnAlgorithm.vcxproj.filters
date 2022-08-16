@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{af7cd8cd-bec0-4e47-b159-799d6d670fe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithm">
+      <UniqueIdentifier>{79076dff-e54a-4c92-b56a-9a36777f2166}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LearnAlgorithm.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Algorithm\red_black_tree.cpp">
+      <Filter>Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\test_red_black_tree.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Algorithm\red_black_tree.hpp">
+      <Filter>Algorithm</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

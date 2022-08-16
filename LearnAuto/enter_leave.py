@@ -231,8 +231,8 @@ config = {
     "minute" : 30
   },
   "leave" : {
-    "hour" : 21, 
-    "minute" : 0 
+    "hour" : 20, 
+    "minute" : 30
   }
 }
 
@@ -240,7 +240,7 @@ if IsAm():
   Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
   Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
 else: 
-  Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
+  #Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
   WaitExactHour(5)
   Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
 

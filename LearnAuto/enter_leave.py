@@ -35,7 +35,7 @@ def WaitTime(target_hour, target_minute):
       return
     print("Waiting {:02}:{:02}".format(target_hour, target_minute))
     MoveKeyboard()
-    time.sleep(300)
+    time.sleep(30)
 
 def WaitExactHour(target_hour):
   while True:
@@ -225,14 +225,14 @@ def Leave(user, pw, hour, minute):
 
 config = {
   "user" : "keedongpark", 
-  "pw" : "6yhn&UJM", 
+  "pw" : "2wsx#EDC", 
   "enter" : {
     "hour" : 9, 
     "minute" : 30
   },
   "leave" : {
-    "hour" : 20, 
-    "minute" : 30
+    "hour" : 18, 
+    "minute" : 50 
   }
 }
 
@@ -240,7 +240,7 @@ if IsAm():
   Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
   Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
 else: 
-  #Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
+  Leave(config["user"], config["pw"],  config["leave"]["hour"], config["leave"]["minute"])
   WaitExactHour(5)
   Enter(config["user"], config["pw"],  config["enter"]["hour"], config["enter"]["minute"])
 

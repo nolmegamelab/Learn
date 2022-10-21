@@ -30,32 +30,42 @@
         {
             this.m_tree_meta = new System.Windows.Forms.TreeView();
             this.m_group_control = new System.Windows.Forms.GroupBox();
-            this.m_button_copy_insert = new System.Windows.Forms.Button();
-            this.m_check_deep = new System.Windows.Forms.CheckBox();
             this.m_label_location = new System.Windows.Forms.Label();
+            this.m_button_copy_insert = new System.Windows.Forms.Button();
+            this.m_fix_current = new System.Windows.Forms.CheckBox();
             this.m_group_control.SuspendLayout();
             this.SuspendLayout();
             // 
             // m_tree_meta
             // 
             this.m_tree_meta.Dock = System.Windows.Forms.DockStyle.Top;
+            this.m_tree_meta.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_tree_meta.Location = new System.Drawing.Point(0, 0);
             this.m_tree_meta.Name = "m_tree_meta";
-            this.m_tree_meta.Size = new System.Drawing.Size(471, 709);
+            this.m_tree_meta.Size = new System.Drawing.Size(471, 481);
             this.m_tree_meta.TabIndex = 0;
-            this.m_tree_meta.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.m_tree_meta_AfterSelect);
+            this.m_tree_meta.DoubleClick += new System.EventHandler(this.m_tree_meta_DoubleClick);
             // 
             // m_group_control
             // 
+            this.m_group_control.Controls.Add(this.m_fix_current);
             this.m_group_control.Controls.Add(this.m_label_location);
-            this.m_group_control.Controls.Add(this.m_check_deep);
             this.m_group_control.Controls.Add(this.m_button_copy_insert);
             this.m_group_control.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.m_group_control.Location = new System.Drawing.Point(0, 700);
+            this.m_group_control.Location = new System.Drawing.Point(0, 522);
             this.m_group_control.Name = "m_group_control";
-            this.m_group_control.Size = new System.Drawing.Size(471, 100);
+            this.m_group_control.Size = new System.Drawing.Size(471, 68);
             this.m_group_control.TabIndex = 1;
             this.m_group_control.TabStop = false;
+            // 
+            // m_label_location
+            // 
+            this.m_label_location.AutoSize = true;
+            this.m_label_location.Location = new System.Drawing.Point(15, 67);
+            this.m_label_location.Name = "m_label_location";
+            this.m_label_location.Size = new System.Drawing.Size(71, 12);
+            this.m_label_location.TabIndex = 2;
+            this.m_label_location.Text = "Sheet1 - A1";
             // 
             // m_button_copy_insert
             // 
@@ -67,26 +77,16 @@
             this.m_button_copy_insert.Text = "복사 && 추가";
             this.m_button_copy_insert.UseVisualStyleBackColor = true;
             // 
-            // m_check_deep
+            // m_fix_current
             // 
-            this.m_check_deep.AutoSize = true;
-            this.m_check_deep.Checked = true;
-            this.m_check_deep.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.m_check_deep.Location = new System.Drawing.Point(130, 37);
-            this.m_check_deep.Name = "m_check_deep";
-            this.m_check_deep.Size = new System.Drawing.Size(76, 16);
-            this.m_check_deep.TabIndex = 1;
-            this.m_check_deep.Text = "전체 계층";
-            this.m_check_deep.UseVisualStyleBackColor = true;
-            // 
-            // m_label_location
-            // 
-            this.m_label_location.AutoSize = true;
-            this.m_label_location.Location = new System.Drawing.Point(15, 67);
-            this.m_label_location.Name = "m_label_location";
-            this.m_label_location.Size = new System.Drawing.Size(71, 12);
-            this.m_label_location.TabIndex = 2;
-            this.m_label_location.Text = "Sheet1 - A1";
+            this.m_fix_current.AutoSize = true;
+            this.m_fix_current.Location = new System.Drawing.Point(151, 35);
+            this.m_fix_current.Name = "m_fix_current";
+            this.m_fix_current.Size = new System.Drawing.Size(132, 16);
+            this.m_fix_current.TabIndex = 3;
+            this.m_fix_current.Text = "현재 항목 고정 편집";
+            this.m_fix_current.UseVisualStyleBackColor = true;
+            this.m_fix_current.CheckedChanged += new System.EventHandler(this.m_fix_current_CheckedChanged);
             // 
             // ControlTreeList
             // 
@@ -95,7 +95,8 @@
             this.Controls.Add(this.m_group_control);
             this.Controls.Add(this.m_tree_meta);
             this.Name = "ControlTreeList";
-            this.Size = new System.Drawing.Size(471, 800);
+            this.Size = new System.Drawing.Size(471, 590);
+            this.Resize += new System.EventHandler(this.ControlTreeList_Resize);
             this.m_group_control.ResumeLayout(false);
             this.m_group_control.PerformLayout();
             this.ResumeLayout(false);
@@ -107,7 +108,7 @@
         private System.Windows.Forms.TreeView m_tree_meta;
         private System.Windows.Forms.GroupBox m_group_control;
         private System.Windows.Forms.Label m_label_location;
-        private System.Windows.Forms.CheckBox m_check_deep;
         private System.Windows.Forms.Button m_button_copy_insert;
+        private System.Windows.Forms.CheckBox m_fix_current;
     }
 }

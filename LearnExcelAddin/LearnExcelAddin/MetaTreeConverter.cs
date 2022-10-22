@@ -22,7 +22,7 @@ namespace LearnExcelAddin
         public void convertValueTree()
         {
             var addin = Globals.ThisAddIn;
-            var wb = addin.Application.ActiveWorkbook;
+            var wb = addin.CurrentWorkbook;
             var ws = wb.Worksheets.Item["meta_data"];
 
             // iterate over the rows and call conversion
@@ -86,6 +86,11 @@ namespace LearnExcelAddin
         // 하위 셀들에 대한 처리를 진행한다. 
         public void convertValueTreeLinked(Excel.Worksheet ws, string parent_key, string array_index)
         {
+            if ( array_index == null || array_index.Length == 0 )
+            {
+                return;
+            }
+
             var editor = Globals.ThisAddIn.Editor;
             Excel.Range range = ws.Range["A1", "A100000"]; // XX: find a better way to specify the range.
 

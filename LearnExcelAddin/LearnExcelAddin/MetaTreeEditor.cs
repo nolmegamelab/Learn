@@ -128,15 +128,20 @@ namespace LearnExcelAddin
             if (node.Tag is MetaValueTag)
             {
                 var tag = (MetaValueTag)node.Tag;
-                var sheet = Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets[tag.SheetName];
-                sheet.Activate();
-
-                var col = convertColumnIndexToColumnAddress(tag.Column);
-
-                var range = sheet.Range($"{col}{tag.Row}", $"{col}{tag.Row}");
-                range.Select();
+                activateNode(tag.SheetName, tag.Column, tag.Row);
             }
         }
+
+        public void activateNode(string sheet_name, uint row, uint col)
+        {
+            var sheet = Globals.ThisAddIn.CurrentWorkbook.Worksheets[sheet_name];
+            sheet.Activate();
+
+            var scol = convertColumnIndexToColumnAddress(col);
+
+            var range = sheet.Range($"{scol}{row}", $"{scol}{row}");
+            range.Select();
+        } 
 
         public void convertValueTree()
         {
@@ -188,7 +193,7 @@ namespace LearnExcelAddin
         public Excel.Worksheet getWorksheetFromTypeInfo(MetaTypeInfo info)
         {
             var sheetName = getSheetNameFromTypeName(info.Name);
-            var cws = Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets[sheetName];
+            var cws = Globals.ThisAddIn.CurrentWorkbook.Worksheets[sheetName];
             return cws;
         }
 
@@ -292,7 +297,7 @@ namespace LearnExcelAddin
                     if (info.Type == MetaType.list)
                     {
                         var sheetName = getSheetNameFromTypeName(info.Name);
-                        var cws = Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets[sheetName];
+                        var cws = Globals.ThisAddIn.CurrentWorkbook.Worksheets[sheetName];
                         if (cws != null)
                         {
                             buildValueTreeForList(cws, node, info, value);
@@ -371,7 +376,7 @@ namespace LearnExcelAddin
                     if (info.Type == MetaType.list)
                     {
                         var sheetName = getSheetNameFromTypeName(info.Name);
-                        var cws = Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets[sheetName];
+                        var cws = Globals.ThisAddIn.CurrentWorkbook.Worksheets[sheetName];
                         if (cws != null)
                         {
                             buildTypeTreeIn(cws, node);

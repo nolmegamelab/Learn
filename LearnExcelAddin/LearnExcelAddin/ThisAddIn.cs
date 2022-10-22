@@ -20,6 +20,8 @@ namespace LearnExcelAddin
 
         public CustomTaskPane TreeListPane { get { return m_pane_tree_list; } }
 
+        public Excel.Workbook CurrentWorkbook { get { return m_current_workbook; } }
+
         public void showMessage(string s)
         {
             m_tree_list.showMessage(s);
@@ -48,9 +50,13 @@ namespace LearnExcelAddin
         private void on_Application_WorkbookActivate(Excel.Workbook wb)
         {
             wb.SheetSelectionChange += on_Wb_SheetSelectionChange;
-            m_current_workbook = wb;
 
-            m_editor.buildTypeTree(wb);
+            // 최초 한번만 설정하고 실행한다.
+            if (m_current_workbook == null)
+            {
+                m_current_workbook = wb;
+                m_editor.buildTypeTree(wb);
+            }
         }
 
         private void on_Wb_SheetSelectionChange(object Sh, Excel.Range target)

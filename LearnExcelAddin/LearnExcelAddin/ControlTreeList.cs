@@ -21,6 +21,11 @@ namespace LearnExcelAddin
 
         public Label MetaLocation { get { return m_label_location; } }
 
+        public void showMessage(string s)
+        {
+            m_message.Text = s;
+        }
+
         private void ControlTreeList_Resize(object sender, EventArgs e)
         {
             m_tree_meta.Size = this.ClientSize - m_group_control.Size;
@@ -34,6 +39,11 @@ namespace LearnExcelAddin
         private void m_fix_current_CheckedChanged(object sender, EventArgs e)
         {
             Globals.ThisAddIn.Editor.setFixCurrentNode(m_fix_current.Checked);
+        }
+
+        private void m_convert_tree_Click(object sender, EventArgs e)
+        {
+            Globals.ThisAddIn.Editor.convertValueTree();
         }
     }
 }

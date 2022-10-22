@@ -30,9 +30,11 @@
         {
             this.m_tree_meta = new System.Windows.Forms.TreeView();
             this.m_group_control = new System.Windows.Forms.GroupBox();
+            this.m_fix_current = new System.Windows.Forms.CheckBox();
             this.m_label_location = new System.Windows.Forms.Label();
             this.m_button_copy_insert = new System.Windows.Forms.Button();
-            this.m_fix_current = new System.Windows.Forms.CheckBox();
+            this.m_convert_tree = new System.Windows.Forms.Button();
+            this.m_message = new System.Windows.Forms.Label();
             this.m_group_control.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,15 +50,28 @@
             // 
             // m_group_control
             // 
+            this.m_group_control.Controls.Add(this.m_message);
+            this.m_group_control.Controls.Add(this.m_convert_tree);
             this.m_group_control.Controls.Add(this.m_fix_current);
             this.m_group_control.Controls.Add(this.m_label_location);
             this.m_group_control.Controls.Add(this.m_button_copy_insert);
             this.m_group_control.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.m_group_control.Location = new System.Drawing.Point(0, 522);
+            this.m_group_control.Location = new System.Drawing.Point(0, 487);
             this.m_group_control.Name = "m_group_control";
-            this.m_group_control.Size = new System.Drawing.Size(471, 68);
+            this.m_group_control.Size = new System.Drawing.Size(471, 103);
             this.m_group_control.TabIndex = 1;
             this.m_group_control.TabStop = false;
+            // 
+            // m_fix_current
+            // 
+            this.m_fix_current.AutoSize = true;
+            this.m_fix_current.Location = new System.Drawing.Point(151, 35);
+            this.m_fix_current.Name = "m_fix_current";
+            this.m_fix_current.Size = new System.Drawing.Size(132, 16);
+            this.m_fix_current.TabIndex = 3;
+            this.m_fix_current.Text = "현재 항목 고정 편집";
+            this.m_fix_current.UseVisualStyleBackColor = true;
+            this.m_fix_current.CheckedChanged += new System.EventHandler(this.m_fix_current_CheckedChanged);
             // 
             // m_label_location
             // 
@@ -77,16 +92,25 @@
             this.m_button_copy_insert.Text = "복사 && 추가";
             this.m_button_copy_insert.UseVisualStyleBackColor = true;
             // 
-            // m_fix_current
+            // m_convert_tree
             // 
-            this.m_fix_current.AutoSize = true;
-            this.m_fix_current.Location = new System.Drawing.Point(151, 35);
-            this.m_fix_current.Name = "m_fix_current";
-            this.m_fix_current.Size = new System.Drawing.Size(132, 16);
-            this.m_fix_current.TabIndex = 3;
-            this.m_fix_current.Text = "현재 항목 고정 편집";
-            this.m_fix_current.UseVisualStyleBackColor = true;
-            this.m_fix_current.CheckedChanged += new System.EventHandler(this.m_fix_current_CheckedChanged);
+            this.m_convert_tree.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.m_convert_tree.Location = new System.Drawing.Point(339, 31);
+            this.m_convert_tree.Name = "m_convert_tree";
+            this.m_convert_tree.Size = new System.Drawing.Size(75, 23);
+            this.m_convert_tree.TabIndex = 4;
+            this.m_convert_tree.Text = "구조 변경";
+            this.m_convert_tree.UseVisualStyleBackColor = true;
+            this.m_convert_tree.Click += new System.EventHandler(this.m_convert_tree_Click);
+            // 
+            // m_message
+            // 
+            this.m_message.AutoSize = true;
+            this.m_message.Location = new System.Drawing.Point(151, 67);
+            this.m_message.Name = "m_message";
+            this.m_message.Size = new System.Drawing.Size(29, 12);
+            this.m_message.TabIndex = 5;
+            this.m_message.Text = "상태";
             // 
             // ControlTreeList
             // 
@@ -110,5 +134,7 @@
         private System.Windows.Forms.Label m_label_location;
         private System.Windows.Forms.Button m_button_copy_insert;
         private System.Windows.Forms.CheckBox m_fix_current;
+        private System.Windows.Forms.Button m_convert_tree;
+        private System.Windows.Forms.Label m_message;
     }
 }

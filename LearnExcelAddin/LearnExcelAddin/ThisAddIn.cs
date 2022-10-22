@@ -20,6 +20,17 @@ namespace LearnExcelAddin
 
         public CustomTaskPane TreeListPane { get { return m_pane_tree_list; } }
 
+        public void showMessage(string s)
+        {
+            m_tree_list.showMessage(s);
+            m_tree_list.Refresh();
+        }
+
+        public void showPopup(string s)
+        {
+            MessageBox.Show(s);
+        }
+
         public MetaTreeEditor Editor { get { return m_editor; } }
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)

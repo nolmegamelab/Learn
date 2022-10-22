@@ -75,11 +75,18 @@ namespace LearnExcelAddin
         private Dictionary<string, MetaTypeInfo> m_types = new Dictionary<string, MetaTypeInfo>();
         private string m_value_tree_index = "";
         private bool m_fix_current_node = false;
+        private bool m_type_tree_built = false;
 
         public MetaTypeNode buildTypeTree(Excel.Workbook wb)
         {
+            if ( m_type_tree_built )
+            {
+                return null;
+            }
+
             var worksheet = wb.Worksheets.Item["meta_data"];
             buildTypeTreeIn(worksheet, m_tree_head);
+            m_type_tree_built = true;
             return m_tree_head;
         }
 
@@ -131,19 +138,12 @@ namespace LearnExcelAddin
             }
         }
 
-        private void expandTreeNodes(TreeNodeCollection nodes, int level)
+        public void convertValueTree()
         {
-            if ( level == 0 )
-            {
-                return;
-            }
-
-            foreach (TreeNode node in nodes)
-            {
-                node.Expand();
-                expandTreeNodes(node.Nodes, --level);
-            }
+            var converter = new MetaTreeConverter();
+            converter.convertValueTree();
         }
+
 
         public MetaTypeNode getTypeTree()
         {
@@ -185,6 +185,87 @@ namespace LearnExcelAddin
             return uint.Parse(val);
         }
 
+        public Excel.Worksheet getWorksheetFromTypeInfo(MetaTypeInfo info)
+        {
+            var sheetName = getSheetNameFromTypeName(info.Name);
+            var cws = Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets[sheetName];
+            return cws;
+        }
+
+        // 컬럼 1이 항상 키를 갖고 있다.  
+        public string getWorksheetKey(Excel.Worksheet ws, uint row)
+        {
+            return getTextAt(ws, row, 1);
+        }
+
+        public List<Excel.Range> findCells(Excel.Worksheet ws, string pattern, Excel.Range range)
+        {
+            Excel.Range currentFind = null;
+            Excel.Range firstFind = null;
+
+            Excel.Range cells = range;
+
+            List<Excel.Range> list = new List<Excel.Range>();
+
+            currentFind = cells.Find(pattern, System.Type.Missing,
+                Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlPart,
+                Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlNext, false,
+                System.Type.Missing, System.Type.Missing);
+
+            while (currentFind != null)
+            {
+                // Keep track of the first range you find. 
+                if (firstFind == null)
+                {
+                    firstFind = currentFind;
+                }
+                // If you didn't move to a new range, you are done.
+                else if (currentFind.get_Address(Excel.XlReferenceStyle.xlA1) == firstFind.get_Address(Excel.XlReferenceStyle.xlA1))
+                {
+                    break;
+                }
+
+                list.Add(currentFind);
+                currentFind = cells.FindNext(currentFind);
+            }
+
+            return list;
+        }
+
+        public string getArrayIndexFromValue(string value)
+        {
+            var builder = new StringBuilder();
+
+            bool left_bracket_found = false;
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] == '[')
+                {
+                    left_bracket_found = true;
+                }
+
+                if (left_bracket_found)
+                {
+                    builder.Append(value[i]);
+                }
+            }
+            return builder.ToString();
+        }
+
+        public string getTextAt(Excel.Worksheet ws, uint row, uint col)
+        {
+            var value_cell = ws.Cells[row, col];
+            var value = value_cell.Text.ToString();
+            return value;
+        }
+
+        public void setTextAt(Excel.Worksheet ws, uint row, uint col, string value)
+        {
+            var range = ws.Cells[row, col];
+            range.Value = value;
+        }
+
         private void buildValueTreeAt(Excel.Worksheet ws, TreeNode parent, uint row)
         {
             for (uint col = 1; col < ws.Columns.Count; col++)
@@ -220,6 +301,7 @@ namespace LearnExcelAddin
                 }
             }
         }
+
         private void buildValueTreeForList(Excel.Worksheet ws, TreeNode node, MetaTypeInfo info, string value)
         {
             var array_index_str = getArrayIndexFromValue(value);
@@ -229,34 +311,9 @@ namespace LearnExcelAddin
                 return;
             }
 
-            Excel.Range currentFind = null;
-            Excel.Range firstFind = null;
+            Excel.Range range = ws.Range["A1", "A100000"]; // XX: find a better way to specify the range.
 
-            Excel.Range cells = ws.Range["A1", "A100000"]; // XX: find a better way
-
-            List<Excel.Range> list = new List<Excel.Range>();
-
-            currentFind = cells.Find(array_index_str, System.Type.Missing,
-                Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlPart,
-                Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlNext, false,
-                System.Type.Missing, System.Type.Missing);
-
-            while (currentFind != null)
-            {
-                // Keep track of the first range you find. 
-                if (firstFind == null)
-                {
-                    firstFind = currentFind;
-                }
-                // If you didn't move to a new range, you are done.
-                else if (currentFind.get_Address(Excel.XlReferenceStyle.xlA1) == firstFind.get_Address(Excel.XlReferenceStyle.xlA1))
-                {
-                    break;
-                }
-
-                list.Add(currentFind);
-                currentFind = cells.FindNext(currentFind);
-            }
+            var list = findCells(ws, array_index_str, range);
 
             foreach ( var target in list )
             {
@@ -280,28 +337,6 @@ namespace LearnExcelAddin
                 }
             }
         }
-
-        private string getArrayIndexFromValue(string value)
-        {
-            var builder = new StringBuilder();
-
-            bool left_bracket_found = false;
-
-            for ( int i=0; i<value.Length; i++ )
-            {
-                if (value[i] == '[')
-                {
-                    left_bracket_found = true;
-                } 
-
-                if ( left_bracket_found)
-                {
-                    builder.Append(value[i]);
-                }
-            }
-            return builder.ToString();
-        }
-            
 
         private void buildTypeTreeIn(Excel.Worksheet ws, MetaTypeNode parent)
         {
@@ -346,13 +381,6 @@ namespace LearnExcelAddin
             }
         }
 
-        private string getTextAt(Excel.Worksheet ws, uint row, uint col)
-        {
-            var value_cell = ws.Cells[row, col];
-            var value = value_cell.Text.ToString();
-            return value;
-        }
-
         private string getSheetNameFromTypeName(string name)
         {
             return name.Split('.')[0];
@@ -361,6 +389,20 @@ namespace LearnExcelAddin
         private string getTypeKey(Excel.Worksheet ws, string index)
         {
             return $"{ws.Name}.{index}";
+        }
+
+        private void expandTreeNodes(TreeNodeCollection nodes, int level)
+        {
+            if (level == 0)
+            {
+                return;
+            }
+
+            foreach (TreeNode node in nodes)
+            {
+                node.Expand();
+                expandTreeNodes(node.Nodes, --level);
+            }
         }
 
         private uint convertColumnAddressToColumnIndex(string address)

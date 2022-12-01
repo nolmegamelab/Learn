@@ -8,6 +8,7 @@ using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
 using Microsoft.Office.Tools;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace LearnExcelAddin
 {
@@ -55,7 +56,8 @@ namespace LearnExcelAddin
             if (m_current_workbook == null)
             {
                 m_current_workbook = wb;
-                m_editor.buildTypeTree(wb);
+                // m_editor.buildTypeTree(wb);
+                testReadPerformance(wb);
             }
         }
 
@@ -75,7 +77,7 @@ namespace LearnExcelAddin
                     // var ncell = cell.Next; // Next는 다음 컬럼의 값을 가져온다.  
                     // m_tree_list.MetaLocation.Text = ncell.Text?.ToString();
 
-                    m_editor.buildValueTree(m_tree_list, target);
+                    // m_editor.buildValueTree(m_tree_list, target);
                 }
                 catch ( Exception ex)
                 {
@@ -97,6 +99,38 @@ namespace LearnExcelAddin
             m_tree_list = new ControlTreeList();
             m_pane_tree_list = this.CustomTaskPanes.Add(m_tree_list, "메타 편집"); 
             m_pane_tree_list.Visible = true;
+        }
+
+        private void testReadPerformance(Excel.Workbook wb)
+        {
+            var ws = (Excel.Worksheet)wb.Worksheets["meta_data"];
+
+            var meta_keys = new HashSet<string>();
+
+            var watch = new Stopwatch();
+            watch.Start();
+
+            // Application.EnableEvents = false;
+            // Application.ScreenUpdating = false;
+
+            for ( int i=1;i<10000; ++i)
+            {
+                var range = (Excel.Range)ws.get_Range($"A{i}");
+                meta_keys.Add($"{range.Value2}");
+                // meta_keys.Add($"{i}");
+            }
+
+            Application.EnableEvents = true;
+            Application.ScreenUpdating = true;
+
+            watch.Stop();
+
+            // adding int : 59 ms
+            // adding from cells : 370 ms
+            // adding from cell : 207 ms 
+
+            var dcell = ws.Cells[1, 1];
+            dcell.Value2 = watch.ElapsedMilliseconds;
         }
 
         #region VSTO에서 생성한 코드

@@ -24,6 +24,9 @@ struct Point {
   y : f32,
 }
 
+// pub를 주고 단일 원소 구조체를 선언해야 모듈 외부에서 접근 가능
+pub struct List(pub Vec<i32>);
+
 impl fmt::Display for DetailedInt {
   // fmt::Display trait의 함수가 fmt이다. 
   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -34,6 +37,24 @@ impl fmt::Display for DetailedInt {
 impl fmt::Display for Point {
   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
     write!(f, "x:{}, y:{}", self.x, self.y)
+  }
+}
+
+impl fmt::Display for List {
+
+  fn fmt(&self, f:&mut fmt::Formatter) -> fmt::Result {
+
+    let vec = &self.0;
+
+    write!(f, "[")?;
+
+    for (index, v) in vec.iter().enumerate() {
+      if index != 0 { 
+        write!(f, ", ")?;
+      }
+      write!(f, "{}", v)?;
+    }
+    write!(f, "]")
   }
 }
 
@@ -66,4 +87,10 @@ pub fn ex_custom_display() {
 
 pub fn ex_print_point() {
   println!("{}", Point{ x: 3.1, y: 3.3 });
+}
+
+pub fn ex_print_list() {
+  let vec = vec![1, 3, 5, 7];
+  let lst = List(vec);
+  println!("{}", lst);
 }

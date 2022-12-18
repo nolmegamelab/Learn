@@ -10,6 +10,14 @@ mod custom_types;
 mod linked_list;
 mod smart_pointers;
 mod rc_ptr;
+mod variable_bindings;
+mod types;
+mod conversion;
+mod expressions;
+mod flow_of_control;
+mod functions;
+mod generics;
+mod scoping;
 
 fn main() {
     // ex_hello_world();
@@ -99,4 +107,97 @@ fn ex_use_custom_rectangle() {
     println!("area:{}", area);
     // debug_assert가 debug 버전에서만 활성화됨
     debug_assert!(area == 10_f32*10_f32);
+}
+
+#[cfg(test)]
+mod test {
+    use crate::variable_bindings;
+    use crate::types;
+    use crate::conversion;
+    use crate::expressions;
+    use crate::flow_of_control;
+    use crate::functions;
+    use crate::generics;
+    use crate::scoping;
+
+    #[test]
+    // cargo test로 실행하면 prinlnt! 출력이 사라진다. 
+    // cargo test -- --nocapture로 실행해야 한다
+    fn test_variable_bindings() {
+        variable_bindings::look_variable_bindings();
+        variable_bindings::look_mutable_bindings();
+        variable_bindings::look_binding_scope();
+        variable_bindings::look_variable_shadowing();
+        variable_bindings::look_binding_freeze();
+    }
+
+    #[test]
+    fn test_types() {
+       types::look_at_conversions(); 
+       types::look_type_literals();
+       types::look_type_inference();
+       types::look_type_aliases();
+    }
+
+    #[test]
+    fn test_conversions() {
+        conversion::look_from_num();
+        conversion::look_into_num();
+        conversion::look_try_from();
+        conversion::look_parse_from_string();
+    }
+
+    #[test]
+    fn test_expressions() {
+        expressions::look_basic_expressions();
+    }
+
+    #[test]
+    fn test_flow_of_control() {
+        flow_of_control::look_if_else();
+        flow_of_control::look_loop();
+        flow_of_control::look_range_for();
+        flow_of_control::look_iter_for();
+        flow_of_control::look_match_tuple_destructuring();
+        flow_of_control::look_match_array_destructuring();
+        flow_of_control::look_match_enum();
+        flow_of_control::look_match_ref_ptr();
+        flow_of_control::look_match_struct();
+        flow_of_control::look_match_guard();
+        flow_of_control::look_match_binding();
+        flow_of_control::look_if_let();
+        flow_of_control::look_if_let_enum();
+        flow_of_control::look_while_let();
+    }
+
+    #[test]
+    fn test_functions() {
+        functions::look_function_basics();
+        functions::look_method();
+        functions::look_capture_move();
+        functions::look_closure_args();
+        functions::look_function_args();
+        functions::look_closure_returns();
+        functions::look_std_any();
+        functions::look_higher_order_function();
+    }
+
+    #[test]
+    fn test_generics() {
+        generics::look_basic();
+        generics::look_generic_functions();
+        generics::look_impl();
+        generics::look_impl_2();
+        generics::look_bounds();
+        generics::look_multi_bounds();
+        generics::look_bound_where();
+        generics::look_associated_types_with_trait();
+        generics::look_phantom_data();
+    }
+
+    #[test]
+    fn test_scoping() {
+        scoping::look_raii();
+        scoping::look_ownership_move();
+    }
 }

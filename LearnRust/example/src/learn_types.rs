@@ -3,6 +3,7 @@
 
 pub fn print_type_of<T>(_ : &T) {
   // generic function과 type에 대한 아규먼트 지정이 ::<T> 형식이다. 
+  // std::any::type_name도 intrinsics의 type_name을 사용한다. 
   println!("{}", std::any::type_name::<T>());
 }
 

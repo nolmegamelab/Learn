@@ -1,3 +1,5 @@
+#![allow(unused_variables)]
+
 use std::collections::HashMap;
 
 /// HashMap은 c++이나 c#에 필적하는 구현을 갖고 있다. 

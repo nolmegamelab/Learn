@@ -280,3 +280,20 @@ pub fn look_lifetime_delicacy() {
     }
     // println!("The longest string is {}", result);
 }
+
+// elision rules 
+// 1. 입력 참조들에 입력 라이프타임 파라미터를 추가한다. 
+// 2. 입력 라이프타임이 하나만 있으면 이를 출력 라이프타임에 지정한다. 
+// 3. self, &self를 갖는 메써드일 경우 출력 라이프타임에 self의 라이프타임을 지정한다. 
+// 
+
+struct ImportantExcerpt<'a> {
+  part : &'a str
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}

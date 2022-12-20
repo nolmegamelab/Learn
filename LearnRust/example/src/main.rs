@@ -20,6 +20,8 @@ mod generics;
 mod scoping;
 mod ownership;
 mod lifetime;
+mod traits;
+mod macros;
 
 fn main() {
     // ex_hello_world();
@@ -123,6 +125,8 @@ mod test {
     use crate::scoping;
     use crate::ownership;
     use crate::lifetime;
+    use crate::traits;
+    use crate::macros;
 
     #[test]
     // cargo test로 실행하면 prinlnt! 출력이 사라진다. 
@@ -226,5 +230,27 @@ mod test {
         lifetime::look_lifetime_annotations_for_traits();
         lifetime::look_lifetime_bounds();
         lifetime::look_lifetime_coercion();
+        lifetime::look_lifetime_annotation_necessity();
+    }
+
+    #[test]
+    fn test_traits() {
+        traits::look_trait_basics();
+        traits::look_iterator();
+        traits::look_impl_trait_return();
+        traits::look_closure_return();
+        traits::look_map_return();
+        traits::look_clone();
+        traits::look_as_to_cast();
+    }
+
+    #[test]
+    fn test_macros() {
+        macros::look_first_macro();
+        macros::look_more_macros();
+        macros::print_result!(3 + 5);
+        macros::look_overloading();
+        macros::look_macro_repeat();
+        macros::look_variadic_macro();
     }
 }

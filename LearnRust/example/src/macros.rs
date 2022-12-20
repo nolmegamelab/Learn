@@ -137,6 +137,7 @@ op!(mul_assign, Mul, *=, mul);
 op!(sub_assign, Sub, -=, sub);
 
 pub mod test {
+    #[allow(unused_imports)]
     use std::iter;
     macro_rules! test {
         ($func:ident, $x:expr, $y:expr, $z:expr) => {

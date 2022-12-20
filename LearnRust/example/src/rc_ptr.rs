@@ -73,5 +73,10 @@ pub fn look_rc_cell_ptr() {
   let mut s1 = rc1.borrow_mut(); // s1이 mut가 아닐 경우 아래 라인에서 mutable로 빌릴 수 없다.
   *s1 = String::from("Welcome");
 
+  drop(s1);
+
+  println!("{}", *rc1.borrow());
+
   // println!("{}", *rc1.borrow());  // s1 borrow로 인해 패닉
+
 }

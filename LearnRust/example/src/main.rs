@@ -18,6 +18,8 @@ mod flow_of_control;
 mod functions;
 mod generics;
 mod scoping;
+mod ownership;
+mod lifetime;
 
 fn main() {
     // ex_hello_world();
@@ -119,6 +121,8 @@ mod test {
     use crate::functions;
     use crate::generics;
     use crate::scoping;
+    use crate::ownership;
+    use crate::lifetime;
 
     #[test]
     // cargo test로 실행하면 prinlnt! 출력이 사라진다. 
@@ -199,5 +203,28 @@ mod test {
     fn test_scoping() {
         scoping::look_raii();
         scoping::look_ownership_move();
+        scoping::look_mutability();
+        scoping::look_partial_moves();
+        scoping::look_borrowing();
+        scoping::look_mutable_borrow();
+    }
+
+    #[test]
+    fn test_ownership() {
+        ownership::look_string();
+        ownership::look_move_or_copy();
+        ownership::look_references_1();
+    }
+
+    #[test]
+    fn test_lifetime() {
+        lifetime::look_basic_lifetime();
+        lifetime::look_lifetime_annotation();
+        lifetime::look_lifetime_annotations_for_functions();
+        lifetime::look_lifetime_annotions_for_methods();
+        lifetime::look_lifetime_annotations_for_types();
+        lifetime::look_lifetime_annotations_for_traits();
+        lifetime::look_lifetime_bounds();
+        lifetime::look_lifetime_coercion();
     }
 }

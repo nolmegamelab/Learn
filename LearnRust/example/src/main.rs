@@ -33,27 +33,7 @@ fn main() {
 
 #[cfg(test)]
 mod test {
-    use crate::debug_1_2_1;
-    use crate::learn_types;
-    use crate::primitives;
-    use crate::custom_types;
-    use crate::smart_pointers;
-    use crate::linked_list;
-    use crate::rc_ptr;
-    use crate::variable_bindings;
-    use crate::types;
-    use crate::conversion;
-    use crate::expressions;
-    use crate::flow_of_control;
-    use crate::functions;
-    use crate::generics;
-    use crate::scoping;
-    use crate::ownership;
-    use crate::lifetime;
-    use crate::traits;
-    use crate::macros;
-    use crate::error_handling; 
-    use crate::library;
+    use super::*;
 
     #[test]
     fn test_debug() {

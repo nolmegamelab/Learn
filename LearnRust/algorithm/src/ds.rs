@@ -11,4 +11,5 @@ pub mod rb_tree;
 pub mod graph;
 pub mod treap;
 pub mod fenwick_tree;
+pub mod vec;
 

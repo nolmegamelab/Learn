@@ -1,0 +1,27 @@
+\contentsline {section}{차\nobreakspace {}례}{2}{section*.1}%
+\contentsline {section}{\numberline {1}MDP 개념}{3}{section.0.1}%
+\contentsline {section}{\numberline {2}그리드 월드와 다이나믹 프로그래밍}{3}{section.0.2}%
+\contentsline {subsection}{\numberline {2.1}벨만 기대방정식과 최적 방정식}{3}{subsection.0.2.1}%
+\contentsline {subsection}{\numberline {2.2}다이나믹 프로그래밍}{4}{subsection.0.2.2}%
+\contentsline {section}{\numberline {3}정책 이터레이션}{4}{section.0.3}%
+\contentsline {subsection}{\numberline {3.1}정책 평가}{5}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {3.2}정책 발전}{5}{subsection.0.3.2}%
+\contentsline {subsection}{\numberline {3.3}종료 조건}{6}{subsection.0.3.3}%
+\contentsline {section}{\numberline {4}가치 이터레이션(반복)}{6}{section.0.4}%
+\contentsline {section}{\numberline {5}몬테카를로(MC) 예측}{6}{section.0.5}%
+\contentsline {subsection}{\numberline {5.1}강화학습의 예측과 제어}{7}{subsection.0.5.1}%
+\contentsline {subsection}{\numberline {5.2}몬테카를로 근사의 예시}{7}{subsection.0.5.2}%
+\contentsline {subsection}{\numberline {5.3}샘플링과 몬테카를로 예측}{7}{subsection.0.5.3}%
+\contentsline {section}{\numberline {6}시간차 예측 - Temporal Difference Prediction}{8}{section.0.6}%
+\contentsline {section}{\numberline {7}살사 - SARSA}{9}{section.0.7}%
+\contentsline {subsection}{\numberline {7.1}살사 코드 설명}{10}{subsection.0.7.1}%
+\contentsline {section}{\numberline {8}큐러닝}{10}{section.0.8}%
+\contentsline {subsection}{\numberline {8.1}살사의 한계}{10}{subsection.0.8.1}%
+\contentsline {subsection}{\numberline {8.2}큐러닝 코드 설명}{11}{subsection.0.8.2}%
+\contentsline {section}{\numberline {9}큐러닝 연습 - 택시}{11}{section.0.9}%
+\contentsline {section}{\numberline {10}큐러닝 연습 - 테트리스}{11}{section.0.10}%
+\contentsline {section}{\numberline {11}근사함수}{11}{section.0.11}%
+\contentsline {subsection}{\numberline {11.1}몬테카를로, 살사, 큐러닝의 한계}{11}{subsection.0.11.1}%
+\contentsline {subsection}{\numberline {11.2}근사함수를 통한 가치함수의 매개변수화}{11}{subsection.0.11.2}%
+\contentsline {section}{\numberline {12}인공신경망}{12}{section.0.12}%
+\contentsline {subsection}{\numberline {12.1}Math Behind DNN}{12}{subsection.0.12.1}%

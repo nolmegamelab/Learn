@@ -1,0 +1,121 @@
+%!TEX encoding = UTF-8 Unicode
+\documentclass[ % options,
+    a4paper,    % papersize
+%    cjk,       % for cjk-ko
+%    usedotemph,% for cjk-ko's \dotemph
+    amsmath,    % load amsmath.sty to typeset math materials
+    itemph,     % to disable gremph default (xe/lua)
+%    footnote,  % korean style footnote
+%    chapter,   % to use \chapter
+]{oblivoir}     % xoblivoir and oblivoir are identical.
+
+\ifPDFTeX       % latex, pdflatex
+%    \usepackage{newtxtext}    % Latin fonts
+\else\ifLuaOrXeTeX   % xelatex or lualatex
+%  \setmainfont{TeX Gyre Termes}   %% Latin fonts
+%	\setkomainfont(Noto Serif CJK KR)(* Bold)(* Medium)
+%	\setkosansfont(Noto Sans CJK KR)(* Bold)(* Medium)
+\fi\fi
+
+% packages
+\usepackage{kotex-logo}
+\usepackage[utf]{kotex}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=10mm,
+ }
+ 
+%% font packages and setup
+\usepackage{fontspec}
+\setmainfont{UnDotum}
+\setsansfont{UnDotum}
+\setmonofont{UnTaza}
+\usepackage{dhucs-interword}
+\interhword[.6]{.475}{.1}{.1}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+% operator
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator{\E}{\mathbb{E}}
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+
+\begin{document}
+
+\title{Graphics 연습}
+\author{wisemountain}
+\date{\today}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{기본기 다지기}
+
+Tex 문서에 깔끔하게 만든 그림이 포함되면 개념을 깔끔하게 이미지로 
+전달할 수 있기 때문에 문서의 품질이 올라간다. 적절한 이미지의 일관된 
+사용은 문서의 시인성도 올리는 효과를 갖는다. 그래서 전체적으로 읽기 
+편한 문서로 만들 수 있다. 
+
+Tikz와 pgf는 latex에서 그리기를 편리하게 해주는 다양한 라이브러리 모음이고 
+일관된 개념하에 개발되었다. 
+
+\subsection{튜토리얼 1}
+
+\begin{tikzpicture}
+\draw (0, 0) -- (4, 0)  -- (4, 4) -- (0, 4) -- (0, 0);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw (2, 5) circle(3cm);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw[step=1cm, gray, very thin] (-2, -2) grid(6, 6);
+\fill[blue!40!white] (0, 0) rectangle(4, 4);
+\end{tikzpicture}
+
+
+\subsection{마인드맵} 
+
+간단한 라이브러리이지만 중간 중간 개념 정리나 방향을 보여주기에 
+좋은 라이브러리이다. 양념으로 매우 좋아 보인다. 
+
+\begin{tikzpicture}[grow cyclic, every node/.style=concept, concept color=blue!40, 
+	level 1/.style={level distance=5cm, sibling angle=30}, 
+	level 2/.style={level distance=3cm, sibling angle=35}]
+
+\node {ShareLaTeX Tutorial Videos}
+	child { node { Beginners Series } }
+	child { node { Thesis Series } }
+	child { node { TikZ Series } 
+		child { node { Test 1 } }
+	}
+	child { node { Beamer Series } }	
+	child { node { Diff Forms Series } }	
+;
+	
+\end{tikzpicture}
+
+
+\section{튜토리얼 2}
+
+https://www.math.uni-leipzig.de/~hellmund/LaTeX/pgf-tut.pdf 여기에 있는 내용이 
+핵심 개념 위주로 매우 잘 설명되어 있다. Tikz와 pgf로 불가능한 것은 없어 보인다. 
+
+path, node 두 가지가 핵심 개념이고 이걸로 모든 것이 가능하다. 참 깔끔하고 
+유용한 라이브러리이다. 
+
+
+
+\end{document}

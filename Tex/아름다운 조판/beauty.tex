@@ -1,0 +1,89 @@
+%!TEX encoding = UTF-8 Unicode
+\documentclass[ % options,
+    a4paper,    % papersize
+%    cjk,       % for cjk-ko
+%    usedotemph,% for cjk-ko's \dotemph
+    amsmath,    % load amsmath.sty to typeset math materials
+    itemph,     % to disable gremph default (xe/lua)
+%    footnote,  % korean style footnote
+%    chapter,   % to use \chapter
+]{oblivoir}     % xoblivoir and oblivoir are identical.
+
+\ifPDFTeX       % latex, pdflatex
+%    \usepackage{newtxtext}    % Latin fonts
+\else\ifLuaOrXeTeX   % xelatex or lualatex
+%  \setmainfont{TeX Gyre Termes}   %% Latin fonts
+%	\setkomainfont(Noto Serif CJK KR)(* Bold)(* Medium)
+%	\setkosansfont(Noto Sans CJK KR)(* Bold)(* Medium)
+\fi\fi
+
+% packages
+\usepackage{kotex-logo}
+\usepackage[utf]{kotex}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+ 
+%% font packages and setup
+\usepackage{fontspec}
+\setmainfont{UnDotum}
+\setsansfont{UnDotum}
+\setmonofont{UnTaza}
+\usepackage{dhucs-interword}
+\interhword[.6]{.475}{.1}{.1}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+% operator
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator{\E}{\mathbb{E}}
+
+% tikz
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+
+\pagestyle{headings}
+
+% 알고리즘 
+
+\usepackage{algorithm,algorithmic}
+
+
+\begin{document}
+
+\title{아름다운 책 만들기}
+\author{wisemountain}
+\date{\today}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{색상 넣기}
+
+
+\section{박스 활용하기}
+
+
+\section{예쁜 구조 만들기}
+
+\section{알고리즘} 
+
+\begin{algorithm}
+\caption{My algorithm}
+\begin{algorithmic}[1]
+  \scriptsize
+  \STATE Statement
+\end{algorithmic}
+\end{algorithm}
+
+
+\end{document}

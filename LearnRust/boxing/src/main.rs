@@ -7,7 +7,7 @@ enum List {
 use crate::List::{Cons, Nil};
 
 fn test_list() {
-    let lst : List = Cons(3, Box::new(Cons(5, Box::new(Nil))));
+    let _lst : List = Cons(3, Box::new(Cons(5, Box::new(Nil))));
 }
 
 struct MyBox<T>(T);

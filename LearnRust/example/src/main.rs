@@ -1,5 +1,4 @@
 // mod 선언은 c++의 include와 유사하다. crate 전체에 걸친다는 점이 다르다.
-
 // #!는 crate 수준의 속성 주석(annotation)이다. 
 #![allow(dead_code)]
 

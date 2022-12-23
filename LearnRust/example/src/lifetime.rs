@@ -297,3 +297,43 @@ impl<'a> ImportantExcerpt<'a> {
         self.part
     }
 }
+
+#[cfg(test)]
+pub mod test {
+    #[derive(Debug)]
+    struct X<'a>(&'a i32);
+
+    impl Drop for X<'_> {
+        fn drop(&mut self) {}
+    }
+
+    #[test]
+    fn test_lifetime() {
+        let mut data = vec![1, 2, 3];
+        let x = X(&data[0]);
+        println!("{:?}", x);
+        drop(x); // 이게 없으면 에러
+        data.push(4);
+    }
+
+    #[test]
+    fn test_hrtb() {
+        struct Closure<F> {
+            data: (u8, u16),
+            func: F,
+        }
+
+        impl<F> Closure<F>
+            where for<'a> F: Fn(&'a (u8, u16)) -> &'a u8,
+        {
+            fn call(&self) -> &u8 {
+                (self.func)(&self.data)
+            }
+        }
+
+        fn do_it(data: &(u8, u16)) -> &u8 { &data.0 }
+
+        let clo = Closure { data: (10, 1), func: do_it };
+        println!("{}", clo.call());
+    }
+}

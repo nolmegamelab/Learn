@@ -7,6 +7,8 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddAntDesign();
+builder.Services.AddScoped<Radzen.ContextMenuService>();
+builder.Services.AddScoped<Radzen.NotificationService>();
+builder.Services.AddScoped<Radzen.DialogService>();
 
 await builder.Build().RunAsync();

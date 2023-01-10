@@ -1,0 +1,73 @@
+﻿@page "/Radzen_01"
+@inject IJSRuntime JSRuntime
+
+@using LearnBlazor.Client.Data
+
+<PageTitle>Index</PageTitle>
+
+<RadzenText TextStyle="TextStyle.Body1" Class="my-4">
+    Display tabular data with ease. Perform paging, sorting and filtering through Entity Framework without extra code.
+</RadzenText>
+
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" 
+        AllowSorting="true" PageSize="6" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@employees" TItem="Employee" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="Employee" Property="EmployeeID" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="Employee" Property="FirstName" Title="First Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="LastName" Title="Last Name" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="Title" Title="Job Title" Width="200px" />
+        <RadzenDataGridColumn TItem="Employee" Property="TitleOfCourtesy" Title="Title" Width="120px" />
+        <RadzenDataGridColumn TItem="Employee" Property="BirthDate" Title="Birth Date" FormatString="{0:d}" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="HireDate" Title="Hire Date" FormatString="{0:d}" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="Address" Title="Address" Width="200px" />
+        <RadzenDataGridColumn TItem="Employee" Property="City" Title="City" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="Region" Title="Region" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="PostalCode" Title="Postal Code" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="Country" Title="Country" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="HomePhone" Title="Home Phone" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="Extension" Title="Extension" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="Notes" Title="Notes" Width="300px" />
+    </Columns>
+</RadzenDataGrid>
+
+<div class="console-content" id="event-console">
+    @foreach(var message in messages)
+    {
+        <div class="console-message">
+            <span class="console-message-time">@message.Date.ToString("HH:mm:ss.ff")</span>
+            <span class="console-message-text">@message.Text</span>
+        </div>
+    }
+</div>
+
+@code {
+    class Message
+    {
+        public String Text { get; set; }    
+
+        public DateTime Date { get; set; }
+    }
+
+    IEnumerable<Employee>? employees;
+
+    List<Message> messages;
+
+    // <EventConsole @ref=@console Class="mt-4" />
+
+    protected override async Task OnInitializedAsync()
+    {
+        messages = new();
+        messages.Add(new Message() { Text = "Hello1", Date = DateTime.Now });
+        messages.Add(new Message() { Text = "Hello2", Date = DateTime.Now });
+        messages.Add(new Message() { Text = "Hello3", Date = DateTime.Now });
+        messages.Add(new Message() { Text = "Hello4", Date = DateTime.Now });
+        messages.Add(new Message() { Text = "Hello5", Date = DateTime.Now });
+
+        await base.OnInitializedAsync();
+        employees = EmployeesData.Data;
+
+        await JSRuntime.InvokeVoidAsync("eval", $"console.log('test js console log')");
+    }
+}

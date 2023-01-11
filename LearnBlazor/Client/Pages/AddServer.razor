@@ -1,0 +1,59 @@
+﻿@page "/AddServer"
+@inject IJSRuntime JSRuntime
+
+@using LearnBlazor.Client.Data
+@using LearnBlazor.Shared;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+@using Newtonsoft.Json;
+@inject IHttpClientFactory ClientFactory
+
+<PageTitle>Index</PageTitle>
+
+<RadzenText TextStyle="TextStyle.Body1" Class="my-4">
+    Display tabular data with ease. Perform paging, sorting and filtering through Entity Framework without extra code.
+</RadzenText>
+
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" 
+        AllowSorting="true" PageSize="6" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@serverList.Servers" TItem="ServerList.Server" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="ServerList.Server" Property="Address" Filterable="false" Title="Address" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    ServerList serverList;
+    string respText;
+
+    // <EventConsole @ref=@console Class="mt-4" />
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "https://localhost:7087/ServerList");
+
+        // set json content
+        // 
+
+        var client = ClientFactory.CreateClient();
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+
+            StreamReader reader = new StreamReader(responseStream);
+            respText = reader.ReadToEnd();
+            serverList = JsonConvert.DeserializeObject<ServerList>(respText);
+        }
+        else
+        {
+            // Show Alert Dialog
+        }
+    }
+}

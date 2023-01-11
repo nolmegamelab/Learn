@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace LearnBlazor.Shared
 {
 	public class ServerList
@@ -5,7 +8,7 @@ namespace LearnBlazor.Shared
 		public class Server
 		{
 			public string? Address { get; set; }
-		}	
+		}
 
 		public List<Server>? Servers { get; private set; }
 

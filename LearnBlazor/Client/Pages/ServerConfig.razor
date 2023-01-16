@@ -1,0 +1,71 @@
+﻿@page "/ServerConfig"
+@inject IJSRuntime JSRuntime
+
+@using LearnBlazor.Client.Data
+@using LearnBlazor.Shared;
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+@using Newtonsoft.Json;
+@inject HttpClient Client
+
+<PageTitle>Index</PageTitle>
+
+<RadzenText TextStyle="TextStyle.Body1" Class="my-4">
+    Display tabular data with ease. Perform paging, sorting and filtering through Entity Framework without extra code.
+</RadzenText>
+
+@if (serverList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" 
+        AllowSorting="true" PageSize="6" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+        Data="@serverList.Servers" TItem="ServerList.Server" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="ServerList.Server" Property="Address" Filterable="false" Title="Address" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+    </Columns>
+</RadzenDataGrid>
+}
+
+@code {
+    ServerList serverList;
+    string respText;
+
+    // <EventConsole @ref=@console Class="mt-4" />
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var reqServer = new ServerList.Server() { Address = "127.0.0.1:9000" };
+
+        var json = JsonConvert.SerializeObject(reqServer);
+        var content = new System.Net.Http.StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        var requestUri = new Uri($"{Client.BaseAddress}ServerConfig");
+        var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = requestUri,
+                Content = content
+            };
+
+        var response = await Client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+
+            StreamReader reader = new StreamReader(responseStream);
+            respText = reader.ReadToEnd();
+
+            // 매우 웃긴 상황. ASP.NET 서버에서 돌려준 JSON을 Newtonsoft.Json으로는 잘 되고 System.Text.Json으로는 안 된다.
+            serverList = JsonConvert.DeserializeObject<ServerList>(respText);
+        }
+        else
+        {
+            // Show Alert Dialog
+        }
+    }
+}

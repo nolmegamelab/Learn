@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Serilog.Extensions.Logging.File;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
+
+builder.Host.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+	logging.AddConsole();
+});
+
+
+builder.Logging.AddFile("Logs/LearnBlazor-{Date}.log");
 
 var app = builder.Build();
 
